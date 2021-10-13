@@ -20,7 +20,7 @@ matrix:
   - env:
       - TEST="CppCheck"
     script:
-      - cmake -DENABLE_CPPCHECK=ON" CMakeLists.txt
+      - cmake -DENABLE_CPPCHECK=ON CMakeLists.txt
       - make
       - make check
 after_success:
