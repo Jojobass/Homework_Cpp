@@ -22,6 +22,6 @@ matrix:
     script:
       - cmake -DENABLE_CPPCHECK=ON CMakeLists.txt
       - make
-      - make check
+      - make cppcheck
 after_success:
   - bash <(curl -s https://codecov.io/bash)
