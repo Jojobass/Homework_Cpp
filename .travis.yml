@@ -20,7 +20,7 @@ matrix:
   - env:
       - TEST="CppCheck"
     script:
-      - cmake -DENABLE_CPPCHECK=ON -DCMAKE_CXX_COMPILER="g++-6" ..
+      - cmake -DENABLE_CPPCHECK=ON -DCMAKE_CXX_COMPILER="g++-6" CMakeLists.txt
       - make
       - make check
 after_success:
