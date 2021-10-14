@@ -41,6 +41,6 @@ matrix:
     script:
       - cmake -DENABLE_CLANG_TIDY=ON  CMakeLists.txt
       - make
-      - make tidy > output.txt
+      - ./tidy
 after_success:
   - bash <(curl -s https://codecov.io/bash)
