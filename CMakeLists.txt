@@ -14,6 +14,8 @@ include_directories(${GTEST_INCLUDE_DIRS})
 add_executable(scrapers_test scrapers_test.cpp)
 target_link_libraries(scrapers_test ${GTEST_LIBRARIES} skyscrapers pthread)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # ------------------------------------------------------------------------------
 # Clang Tidy
 # ------------------------------------------------------------------------------
