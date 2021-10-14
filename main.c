@@ -29,8 +29,7 @@ int main() {
         // array_dynamic = (Skyscraper *) realloc(array_dynamic, size_dynamic * sizeof(Skyscraper));
         Skyscraper *tmp = (Skyscraper *) realloc(array_dynamic, size_dynamic * sizeof(Skyscraper));
         if (tmp != NULL) array_dynamic = tmp;
-        else
-        {
+        else {
             free(tmp);
             free(array_dynamic);
             printf("Reallocation error!");
