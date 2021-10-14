@@ -39,11 +39,22 @@ matrix:
     script:
       - clang-tidy main.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
       - clang-tidy skyscrapers.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
+      - clang-tidy skyscrapers.h -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
     
   - env:
       - TEST="Clang-format"
     script:
       - clang-format -style=Google main.c
       - clang-format -style=Google skyscrapers.c
+      - clang-format -style=Google skyscrapers.h
+  
+  - env:
+      - TEST="Cpplint"
+    script:
+      - sudo apt-get install -y pip
+      - pip install cpplint
+      - cpplint main.c
+      - cpplint skyscrapers.c
+      - cpplint skyscrapers.h
 after_success:
   - bash <(curl -s https://codecov.io/bash)
