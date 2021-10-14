@@ -34,7 +34,7 @@ matrix:
     addons:
       apt:
         sources:
-          - llvm-toolchain-xenial-7
+          - llvm-toolchain-trusty-7
         packages:
           - clang-7.0
           - clang-tidy-7.0
