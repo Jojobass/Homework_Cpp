@@ -31,16 +31,6 @@ matrix:
   - os: linux
     env:
       - TEST="Clang Tidy"
-    addons:
-      apt:
-        sources:
-          - ubuntu-toolchain-r-test
-          - llvm-toolchain-trusty-4.0
-        packages:
-          - clang-4.0
-          - clang-tidy-4.0
-          - gcc-6
-          - g++-6
     script:
       - cmake -DENABLE_CLANG_TIDY=ON  CMakeLists.txt
       - make
