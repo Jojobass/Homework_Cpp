@@ -36,7 +36,7 @@ if(ENABLE_CLANG_TIDY)
     list(APPEND RUN_CLANG_TIDY_BIN_ARGS
         -clang-tidy-binary ${CLANG_TIDY_BIN}
         -header-filter=.*
-        -line-filter=[{"name":".c"},{"name":".h"}]
+        -line-filter=[{"name":"scrapers_test.cpp","lines":[[9999999,9999999]]},{"name":".c"},{"name":".h"}]
         -checks=clan*,cert*,misc*,perf*,cppc*,read*,mode*,-cert-err58-cpp,-misc-noexcept-move-constructor
     )
 
