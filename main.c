@@ -4,34 +4,34 @@
 #include "skyscrapers.h"
 
 int main() {
-    //динамический массив
+    // динамический массив
     Skyscraper *array_dynamic = (Skyscraper *) malloc(6 * sizeof(Skyscraper));
     Skyscraper array[6];
     fill(array);
-    //первые 6 небоскребов заданы
+    // первые 6 небоскребов заданы
     memcpy(array_dynamic, array, sizeof(array));
-    //размер массива
+    // размер массива
     int size_dynamic = 6;
-    //ввод небоскребов с консоли
+    // ввод небоскребов с консоли
     while (1) {
-        //буферный элемент
+        // буферный элемент
         Skyscraper elem;
-        //продолжение либо выход из цикла
+        // продолжение либо выход из цикла
         printf("Create one more skyscraper (y/n)? ");
         char yn = getchar();
         if (yn != 'y') break;
-        //увеличение размера массива на 1
+        // увеличение размера массива на 1
         size_dynamic++;
-        //ввод характеристик нового
+        // ввод характеристик нового
         elem = add_skyscraper(size_dynamic);
-        //реаллокация памяти для массива
+        // реаллокация памяти для массива
         array_dynamic = (Skyscraper *) realloc(array_dynamic, size_dynamic * sizeof(Skyscraper));
-        if(array_dynamic == NULL) free(array_dynamic);
-        //присвоение последнему элементу введенного
+        if (array_dynamic == NULL) free(array_dynamic);
+        // присвоение последнему элементу введенного
         array_dynamic[size_dynamic - 1] = elem;
         getchar();
     }
-    //вывод массивов
+    // вывод массивов
     printf("Несортированный массив:\n");
     for (int i = 0; i < size_dynamic; ++i)
         printf("%d floors, %.2lf m, %.2lf m - spire, %s, %s\n",
@@ -56,4 +56,3 @@ int main() {
 
     return 0;
 }
-
