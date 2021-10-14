@@ -60,5 +60,16 @@ matrix:
       - TEST="scan-build"
     script:
       - scan-build gcc main.c skyscrapers.c skyscrapers.h
+      
+  - env:
+      - TEST="fbinfer"
+    script:
+      - |
+        VERSION=0.XX.Y; \
+        curl -sSL "https://github.com/facebook/infer/releases/download/v$VERSION/infer-linux64-v$VERSION.tar.xz" | sudo tar -C /opt -xJ && \
+        sudo ln -s "/opt/infer-linux64-v$VERSION/bin/infer" /usr/local/bin/infer
+      - infer run -- gcc -c main.c
+      - infer run -- gcc -c skyscrapers.c
+      - infer run -- gcc -c skyscrapers.h
 after_success:
   - bash <(curl -s https://codecov.io/bash)
