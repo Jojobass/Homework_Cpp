@@ -7,7 +7,7 @@ typedef struct Skyscraper {
     char *region;
 } Skyscraper;
 
-void swap(Skyscraper *x, Skyscraper *y);
+void swap_scraper(Skyscraper *x, Skyscraper *y);
 
 void sort_skyscrapers(Skyscraper arr[], int size, int mode);
 
