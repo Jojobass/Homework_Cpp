@@ -16,11 +16,12 @@ script:
   - cmake CMakeLists.txt
   - make
 matrix:
+
   include:
   - env:
       - TEST="CppCheck"
     script:
-      - cmake -DENABLE_CPPCHECK=ON CMakeLists.txt
+      - cmake CMakeLists.txt
       - make
       - sudo apt-get install cppcheck
       - cppcheck .
@@ -28,8 +29,7 @@ matrix:
   #
   # Clang Tidy
   #
-  - os: linux
-    env:
+  - env:
       - TEST="Clang Tidy"
     addons:
       apt:
@@ -39,9 +39,15 @@ matrix:
           - clang-7
           - clang-tidy-7
     script:
-      - cmake -DENABLE_CLANG_TIDY=ON  CMakeLists.txt
+      - cmake CMakeLists.txt
       - make
       - clang-tidy main.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
       - clang-tidy skyscrapers.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
+    
+  - env:
+      - TEST="Clang-format"
+    script:
+      - clang-format -i -style=Google main.c
+      - clang-format -i -style=Google skyscrapers.c
 after_success:
   - bash <(curl -s https://codecov.io/bash)
