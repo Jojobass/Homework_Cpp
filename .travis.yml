@@ -31,13 +31,13 @@ matrix:
   - os: linux
     env:
       - TEST="Clang Tidy"
-    addons:
-      apt:
-        sources:
-          - llvm-toolchain-trusty-7.0
-        packages:
-          - clang-7.0
-          - clang-tidy-7.0
+    #addons:
+    #  apt:
+    #    sources:
+    #      - llvm-toolchain-trusty-7.0
+    #    packages:
+    #      - clang-7.0
+    #      - clang-tidy-7.0
     script:
       - cmake -DENABLE_CLANG_TIDY=ON  CMakeLists.txt
       - make
