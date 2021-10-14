@@ -47,7 +47,7 @@ matrix:
   - env:
       - TEST="Clang-format"
     script:
-      - clang-format -i -style=Google main.c
-      - clang-format -i -style=Google skyscrapers.c
+      - clang-format -style=Google main.c
+      - clang-format -style=Google skyscrapers.c
 after_success:
   - bash <(curl -s https://codecov.io/bash)
