@@ -9,7 +9,8 @@ int main() {
     Skyscraper array[6];
     fill(array);
     // первые 6 небоскребов заданы
-    memcpy(array_dynamic, array, sizeof(array));
+    if(array_dynamic!=NULL)
+        memcpy(array_dynamic, array, sizeof(array));
     // размер массива
     int size_dynamic = 6;
     // ввод небоскребов с консоли
@@ -25,8 +26,15 @@ int main() {
         // ввод характеристик нового
         elem = add_skyscraper(size_dynamic);
         // реаллокация памяти для массива
-        array_dynamic = (Skyscraper *) realloc(array_dynamic, size_dynamic * sizeof(Skyscraper));
-        if (array_dynamic == NULL) free(array_dynamic);
+        //array_dynamic = (Skyscraper *) realloc(array_dynamic, size_dynamic * sizeof(Skyscraper));
+        Skyscraper * tmp= (Skyscraper *) realloc(array_dynamic, size_dynamic * sizeof(Skyscraper));
+        if (tmp != NULL) array_dynamic=tmp;
+        else{
+            free(tmp);
+            free(array_dynamic);
+            printf("Reallocation error!");
+            return 1;
+        }
         // присвоение последнему элементу введенного
         array_dynamic[size_dynamic - 1] = elem;
         getchar();
