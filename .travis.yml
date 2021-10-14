@@ -53,8 +53,8 @@ matrix:
     script:
       - sudo apt-get install -y pip
       - pip install cpplint
-      - cpplint main.c --filter:-legal/copyright,-build/include_subdir,-readability/casting,-whitespace/line_length
-      - cpplint skyscrapers.c --filter:-legal/copyright,-build/include_subdir,-readability/casting,-whitespace/line_length
-      - cpplint skyscrapers.h --filter:-legal/copyright
+      - cpplint main.c --filter=-legal/copyright,-build/include_subdir,-readability/casting,-whitespace/line_length
+      - cpplint skyscrapers.c --filter=-legal/copyright,-build/include_subdir,-readability/casting,-whitespace/line_length
+      - cpplint skyscrapers.h --filter=-legal/copyright
 after_success:
   - bash <(curl -s https://codecov.io/bash)
