@@ -28,7 +28,8 @@ int main() {
         // реаллокация памяти для массива
         // array_dynamic = (Skyscraper *) realloc(array_dynamic, size_dynamic * sizeof(Skyscraper));
         Skyscraper *tmp = (Skyscraper *) realloc(array_dynamic, size_dynamic * sizeof(Skyscraper));
-        if (tmp != NULL) array_dynamic = tmp;
+        if (tmp != NULL) 
+            array_dynamic = tmp;
         else {
             free(tmp);
             free(array_dynamic);
