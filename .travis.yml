@@ -59,6 +59,6 @@ matrix:
   - env:
       - TEST="scan-build"
     script:
-      - scan-build make
+      - scan-build gcc main.c skyscrapers.c skyscrapers.h
 after_success:
   - bash <(curl -s https://codecov.io/bash)
