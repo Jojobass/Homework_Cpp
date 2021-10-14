@@ -31,6 +31,13 @@ matrix:
   - os: linux
     env:
       - TEST="Clang Tidy"
+    addons:
+      apt:
+        sources:
+          - llvm-toolchain-trusty-4.0
+        packages:
+          - clang-4.0
+          - clang-tidy-4.0
     script:
       - cmake -DENABLE_CLANG_TIDY=ON  CMakeLists.txt
       - make
