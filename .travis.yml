@@ -55,5 +55,10 @@ matrix:
       - cpplint --filter=-legal/copyright,-build/include_subdir,-readability/casting,-whitespace/line_length main.c
       - cpplint --filter=-legal/copyright,-build/include_subdir,-readability/casting,-whitespace/line_length skyscrapers.c
       - cpplint --filter=-legal/copyright skyscrapers.h
+      
+  - env:
+      - TEST="scan-build"
+    script:
+      - scan-build make
 after_success:
   - bash <(curl -s https://codecov.io/bash)
