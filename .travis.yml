@@ -21,8 +21,6 @@ matrix:
   - env:
       - TEST="CppCheck"
     script:
-      - cmake CMakeLists.txt
-      - make
       - sudo apt-get install cppcheck
       - cppcheck .
   
@@ -39,8 +37,6 @@ matrix:
           - clang-7
           - clang-tidy-7
     script:
-      - cmake CMakeLists.txt
-      - make
       - clang-tidy main.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
       - clang-tidy skyscrapers.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
     
