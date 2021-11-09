@@ -79,33 +79,47 @@ int MySort(int *array, int arr_size) {
         if (waitpid(pids[i], &status, 0) != pids[i]) {
             return 0;
         }
-        WIFEXITED(status) != 0 ? printf("1 ") : printf("0 ");
+        WIFEXITED(status) != 0 ? printf("exited ") : printf("stayed ");
+
 //        pids[i]=0;
     }
 
+    printf("\nPIDs:\n");
     for(int i=0; i<num_of_processes; i++)
         printf("%d ", pids[i]);
 
+
+    int pids1_size = 0;
+    for (int i = num_of_processes; i > 0; i /= 2){
+        for (int j = 2; j <= i; j += 2){
+            ++pids1_size;
+        }
+    }
+    printf("\nРазмер pids1 для записи новых pid:\n%d\n", pids1_size);
+    pid_t pids1[pids1_size];
+    int pids1_cnt=0;
+
     for (int i = num_of_processes; i > 0; i /= 2) {
         for (int j = 0; j < i; j += 2) {
-            pids[j] = fork();
-            if (pids[j] == 0) {
+            pids1[pids1_cnt] = fork();
+            if (pids1[pids1_cnt] == 0) {
                 Merge(shared_memory + (arr_size / i) * j, shared_memory + (arr_size / i) * (j + 1), arr_size / i);
 
                 exit(EXIT_SUCCESS);
             }
+            ++pids1_cnt;
         }
-        for (int j = 0; j < i/2; ++j) {
-            if (waitpid(pids[j], NULL, 0) != pids[j]) {
+        for (int j = 0; j <= pids1_cnt; ++j) {
+            if (waitpid(pids1[j], NULL, 0) != pids[j]) {
                 return 0;
             }
-            pids[j]=0;
+//            pids[j]=0;
         }
     }
 
-    for (int i = 0; i < arr_size; ++i) {
-        printf("%d\t%d\t%d\n", i, shared_memory[i], array[i]);
-    }
+//    for (int i = 0; i < arr_size; ++i) {
+//        printf("%d\t%d\t%d\n", i, shared_memory[i], array[i]);
+//    }
 }
 
 int main() {
