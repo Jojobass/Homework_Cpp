@@ -24,9 +24,7 @@ matrix:
       - sudo apt-get -q install cppcheck
       - cppcheck .
   
-  #
-  # Clang Tidy
-  #
+
   - env:
       - TEST="Clang Tidy"
     addons:
