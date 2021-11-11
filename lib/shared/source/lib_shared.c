@@ -56,7 +56,7 @@ void merge(int *arr_first, int *arr_second, int arr_size1, int arr_size2) {
 
 int *my_sort(int *array, int arr_size) {
 //    максимальное количество одновременных процессов
-    long num_of_processes = sysconf(_SC_NPROCESSORS_ONLN);
+    int num_of_processes = sysconf(_SC_NPROCESSORS_ONLN);
 //    массив с PID всех процессов
     pid_t pids[num_of_processes];
 //    массив, который могут читать и изменять все процессы
