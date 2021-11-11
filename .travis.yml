@@ -6,6 +6,7 @@ compiler:
   - gcc
 install:
   - sudo apt-get -q install cmake
+  - sudo apt-get -q install gcovr
   - sudo apt-get -q install libgtest-dev
   - cd /usr/src/gtest
   - sudo cmake CMakeLists.txt
@@ -13,60 +14,67 @@ install:
   - sudo cp *.a /usr/lib
   - cd -
 script:
-  - cmake CMakeLists.txt
-  - make
+  - cmake -B build
+  - make -C build
+  - cd build && ctest --output-on-failure
 matrix:
-
   include:
-  - env:
-      - TEST="CppCheck"
-    script:
-      - sudo apt-get -q install cppcheck
-      - cppcheck .
-  
+    - env:
+        - TEST="Coverage"
+      script:
+        - cmake -B build
+        - make -C build
+        - curl -Os https://uploader.codecov.io/latest/linux/codecov
+        - chmod +x codecov
+        - ./codecov -t ${CODECOV_TOKEN} -f  <(gcovr -e '.*/tests/.*' -x)
 
-  - env:
-      - TEST="Clang Tidy"
-    addons:
-      apt:
-        sources:
-          - llvm-toolchain-xenial-7
-        packages:
-          - clang-7
-          - clang-tidy-7
-    script:
-      - clang-tidy main.c lib/shared/source/lib_shared.c lib/static/source/lib_static.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
+    - env:
+        - TEST="CppCheck"
+      script:
+        - sudo apt-get -q install cppcheck
+        - cppcheck .
 
+    - env:
+        - TEST="Clang Tidy"
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-xenial-7
+          packages:
+            - clang-7
+            - clang-tidy-7
+      script:
+        - clang-tidy main.c lib/shared/source/lib_shared.c lib/static/source/lib_static.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
 
-  - env:
-      - TEST="Clang-format"
-    script:
-      - clang-format -style=Google main.c
-      - clang-format -style=Google lib/static/source/lib_static.c
-      - clang-format -style=Google lib/shared/source/lib_shared.c
-  
-  - env:
-      - TEST="Cpplint"
-    script:
-      - pip install cpplint
-      - cpplint --filter=-legal/copyright,-build/include_subdir,-readability/casting,-whitespace/line_length,-runtime/arrays,-runtime/threadsafe_fn main.c
-      - cpplint --filter=-legal/copyright,-build/include_subdir,-readability/casting,-whitespace/line_length lib/static/source/lib_static.c
-      - cpplint --filter=-legal/copyright,-build/include_subdir,-readability/casting,-whitespace/line_length,-runtime/arrays lib/shared/source/lib_shared.c
-      
-  - env:
-      - TEST="scan-build"
-    script:
-      - scan-build gcc main.c lib/static/source/lib_static.c
-      - scan-build gcc main.c lib/shared/source/lib_shared.c
-      
-  - env:
-      - TEST="fbinfer"
-    script:
-      - VERSION=1.0.0; curl -sSL "https://github.com/facebook/infer/releases/download/v$VERSION/infer-linux64-v$VERSION.tar.xz" | sudo tar -C /opt -xJ && sudo ln -s "/opt/infer-linux64-v$VERSION/bin/infer" /usr/local/bin/infer
-      - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-      - sudo apt-get -qq dist-upgrade
-      - infer run -- gcc -c main.c
-      - infer run -- gcc -c lib/static/source/lib_static.c
-      - infer run -- gcc -c lib/shared/source/lib_shared.c
+    - env:
+        - TEST="Clang-format"
+      script:
+        - clang-format -style=Google main.c
+        - clang-format -style=Google lib/static/source/lib_static.c
+        - clang-format -style=Google lib/shared/source/lib_shared.c
+
+    - env:
+        - TEST="Cpplint"
+      script:
+        - pip install cpplint
+        - cpplint --filter=-legal/copyright,-build/include_subdir,-readability/casting,-whitespace/line_length,-runtime/arrays,-runtime/threadsafe_fn main.c
+        - cpplint --filter=-legal/copyright,-build/include_subdir,-readability/casting,-whitespace/line_length lib/static/source/lib_static.c
+        - cpplint --filter=-legal/copyright,-build/include_subdir,-readability/casting,-whitespace/line_length,-runtime/arrays lib/shared/source/lib_shared.c
+
+    - env:
+        - TEST="scan-build"
+      script:
+        - scan-build gcc main.c lib/static/source/lib_static.c
+        - scan-build gcc main.c lib/shared/source/lib_shared.c
+
+    - env:
+        - TEST="fbinfer"
+      script:
+        - VERSION=1.0.0; curl -sSL "https://github.com/facebook/infer/releases/download/v$VERSION/infer-linux64-v$VERSION.tar.xz" | sudo tar -C /opt -xJ && sudo ln -s "/opt/infer-linux64-v$VERSION/bin/infer" /usr/local/bin/infer
+        - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+        - sudo apt-get -qq dist-upgrade
+        - infer run -- gcc -c main.c
+        - infer run -- gcc -c lib/static/source/lib_static.c
+        - infer run -- gcc -c lib/shared/source/lib_shared.c
 after_success:
   - bash <(curl -s https://codecov.io/bash)

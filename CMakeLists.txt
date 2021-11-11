@@ -25,7 +25,7 @@ endif()
 
 add_subdirectory(lib/shared)
 add_subdirectory(lib/static)
-add_subdirectory(test)
+add_subdirectory(tests)
 
 add_executable(main main.c)
 
