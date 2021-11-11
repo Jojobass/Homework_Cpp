@@ -2,7 +2,7 @@
 // Created by ivan on 08.11.2021.
 //
 
-#include "lib.h"
+//#include "lib.h"
 
 void swap(int *first, int *second) {
     int buf = *first;
