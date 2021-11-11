@@ -26,7 +26,7 @@ matrix:
         - TEST="Coverage"
       script:
         - mkdir build
-        - cmake -S . -B build
+        - cmake -S .. -B build
         - make -C build
         - curl -Os https://uploader.codecov.io/latest/linux/codecov
         - chmod +x codecov
