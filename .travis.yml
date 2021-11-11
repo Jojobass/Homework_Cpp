@@ -25,6 +25,7 @@ matrix:
     - env:
         - TEST="Coverage"
       script:
+        - pwd
         - mkdir build
         - cmake -S ../ -B build
         - make -C build
