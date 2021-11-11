@@ -27,6 +27,7 @@ matrix:
       script:
         - pwd
         - mkdir build
+        - pwd
         - cmake -S ../ -B build
         - make -C build
         - curl -Os https://uploader.codecov.io/latest/linux/codecov
