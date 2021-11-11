@@ -35,6 +35,14 @@ matrix:
         - ./codecov -t ${CODECOV_TOKEN} -f  <(gcovr -e '.*/tests/.*' -x)
 
     - env:
+        - TEST="Sanitizer"
+      script:
+        - cd build
+        - cmake ..
+        - make
+        - ctest --output-on-failure
+
+    - env:
         - TEST="CppCheck"
       script:
         - sudo apt-get -q install cppcheck
