@@ -24,6 +24,7 @@ matrix:
     - env:
         - TEST="Coverage"
       script:
+        - mkdir build
         - cmake -B build
         - make -C build
         - curl -Os https://uploader.codecov.io/latest/linux/codecov
