@@ -8,11 +8,11 @@ install:
   - sudo apt-get -q install cmake
   - sudo apt-get -q install gcovr
   - sudo apt-get -q install libgtest-dev
-  - cd /usr/src/gtest
-  - sudo cmake CMakeLists.txt
-  - sudo make
-  - sudo cp *.a /usr/lib
-  - cd -
+#  - cd /usr/src/gtest
+#  - sudo cmake CMakeLists.txt
+#  - sudo make
+#  - sudo cp *.a /usr/lib
+#  - cd -
 script:
   - mkdir build
   - cmake -S . -B build
