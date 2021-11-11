@@ -25,11 +25,11 @@ matrix:
     - env:
         - TEST="Coverage"
       script:
-        - pwd
         - mkdir build
-        - pwd
-        - cmake -S ../ -B build
-        - make -C build
+        - cd build
+        - cmake ..
+        - make
+        - cd -
         - curl -Os https://uploader.codecov.io/latest/linux/codecov
         - chmod +x codecov
         - ./codecov -t ${CODECOV_TOKEN} -f  <(gcovr -e '.*/tests/.*' -x)
