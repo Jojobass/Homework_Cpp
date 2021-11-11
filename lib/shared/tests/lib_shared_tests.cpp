@@ -55,4 +55,7 @@ int *sorted_array = my_sort(array, 99999);
 EXPECT_EQ(test(sorted_array, 99999), 0);
 }
 
-
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
