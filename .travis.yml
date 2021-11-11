@@ -42,16 +42,16 @@ matrix:
       - TEST="Clang-format"
     script:
       - clang-format -style=Google main.c
-      - clang-format -style=Google lib_static.c
-      - clang-format -style=Google lib_shared.c
+      - clang-format -style=Google lib/static/source/lib_static.c
+      - clang-format -style=Google lib/shared/source/lib_shared.c
   
   - env:
       - TEST="Cpplint"
     script:
       - pip install cpplint
       - cpplint --filter=-legal/copyright,-build/include_subdir,-readability/casting,-whitespace/line_length main.c
-      - cpplint --filter=-legal/copyright,-build/include_subdir,-readability/casting,-whitespace/line_length lib_static.c
-      - cpplint --filter=-legal/copyright,-build/include_subdir,-readability/casting,-whitespace/line_length lib_shared.c
+      - cpplint --filter=-legal/copyright,-build/include_subdir,-readability/casting,-whitespace/line_length lib/static/source/lib_static.c
+      - cpplint --filter=-legal/copyright,-build/include_subdir,-readability/casting,-whitespace/line_length lib/shared/source/lib_shared.c
       
   - env:
       - TEST="scan-build"
@@ -65,7 +65,7 @@ matrix:
       - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
       - sudo apt-get -qq dist-upgrade
       - infer run -- gcc -c main.c
-      - infer run -- gcc -c lib_static.c
-      - infer run -- gcc -c lib_shared.c
+      - infer run -- gcc -c lib/static/source/lib_static.c
+      - infer run -- gcc -c lib/shared/source/lib_shared.c
 after_success:
   - bash <(curl -s https://codecov.io/bash)
