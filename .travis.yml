@@ -13,7 +13,7 @@ install:
   - sudo cp *.a /usr/lib
   - cd -
 script:
-  - cmake CMakeLists.txt
+  - cmake CMakeLists.txt -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
   - make
 matrix:
 
@@ -38,8 +38,12 @@ matrix:
 #      - clang-tidy main.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
 #      - clang-tidy lib_static.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
 #      - clang-tidy lib_shared.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
-      - clang-tidy * -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
-    
+      - clang-tidy lib/shared/source/lib_shared.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus* -p
+      - clang-tidy lib/static/source/lib_static.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus* -p
+      - clang-tidy test/direct/test.cpp -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus* -p
+      - clang-tidy main.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus* -p
+
+
   - env:
       - TEST="Clang-format"
     script:
