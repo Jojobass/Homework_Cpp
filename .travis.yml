@@ -14,6 +14,7 @@ install:
   - sudo cp *.a /usr/lib
   - cd -
 script:
+  - mkdir build
   - cmake -B build
   - make -C build
   - cd build && ctest --output-on-failure
