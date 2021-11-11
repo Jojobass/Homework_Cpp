@@ -57,7 +57,7 @@ matrix:
       - TEST="scan-build"
     script:
       - scan-build gcc main.c lib/static/source/lib_static.c
-      - scan-build gcc lib/shared/source/lib_shared.c
+      - scan-build gcc main.c lib/shared/source/lib_shared.c
       
   - env:
       - TEST="fbinfer"
