@@ -35,13 +35,7 @@ matrix:
           - clang-7
           - clang-tidy-7
     script:
-#      - clang-tidy main.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
-#      - clang-tidy lib_static.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
-#      - clang-tidy lib_shared.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
-#      - clang-tidy lib/shared/source/lib_shared.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus* -p *
-#      - clang-tidy lib/static/source/lib_static.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus* -p *
-#      - clang-tidy test/direct/test.cpp -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus* -p *
-      - clang-tidy main.c lib/shared/source/lib_shared.c lib/static/source/lib_static.c test/direct/test.cpp -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
+      - clang-tidy main.c lib/shared/source/lib_shared.c lib/static/source/lib_static.c -checks=-*,clang-analyzer-*,-clang-analyzer-cplusplus*
 
 
   - env:
