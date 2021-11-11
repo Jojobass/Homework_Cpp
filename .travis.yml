@@ -17,7 +17,7 @@ script:
   - mkdir build
   - cmake -S . -B build
   - make -C build
-  - cd ..
+#  - cd ..
   - cd build && ctest --output-on-failure
   - cd ..
 matrix:
