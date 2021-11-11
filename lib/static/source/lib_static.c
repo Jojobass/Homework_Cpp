@@ -4,7 +4,7 @@
 
 #include "lib.h"
 
-void swap(int* first, int* second){
+void swap(int *first, int *second) {
     int buf = *first;
     *first = *second;
     *second = buf;
