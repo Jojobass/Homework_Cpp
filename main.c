@@ -15,6 +15,6 @@ int main() {
     for (int i = 0; i < size; ++i) {
         printf("%d)\t%d\n", i + 1, sorted_array[i]);
     }
-    printf("Errors: %d", test(sorted_array, size));
+    printf("Errors: %d\n", test(sorted_array, size));
     return 0;
 }
