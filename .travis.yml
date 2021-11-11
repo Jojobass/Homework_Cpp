@@ -37,6 +37,7 @@ matrix:
     - env:
         - TEST="Sanitizer"
       script:
+        - mkdir build
         - cd build
         - cmake ..
         - make

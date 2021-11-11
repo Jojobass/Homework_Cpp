@@ -17,7 +17,7 @@ void swap(int *first, int *second) {
     *second = buf;
 }
 
-//сортировка выбором
+//  сортировка выбором
 void small_sort(int *array, int arr_size) {
     for (int i = 0; i < arr_size - 1; ++i) {
         for (int j = i + 1; j < arr_size; ++j) {
