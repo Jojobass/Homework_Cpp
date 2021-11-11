@@ -25,13 +25,13 @@ int main() {
             array[j] = rand() % size;
 
         clock_t begin_static = clock();
-        sort(array, size);
+        static_sort(array, size);
         clock_t end_static = clock();
 
         time_static += (double) (end_static - begin_static) / CLOCKS_PER_SEC;
 
         clock_t begin_shared = clock();
-        sort(array, size);
+        shared_sort(array, size);
         clock_t end_shared = clock();
 
         time_shared += (double) (end_shared - begin_shared) / CLOCKS_PER_SEC;

@@ -5,6 +5,6 @@
 #ifndef HW2_TEST_STATIC_H
 #define HW2_TEST_STATIC_H
 
-int* sort(int* array, int arr_size);
+int* static_sort(int* array, int arr_size);
 
 #endif //HW2_TEST_STATIC_H

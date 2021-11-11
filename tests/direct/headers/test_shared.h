@@ -5,6 +5,6 @@
 #ifndef HW2_TEST_SHARED_H
 #define HW2_TEST_SHARED_H
 
-int* sort(int* array, int arr_size);
+int* shared_sort(int* array, int arr_size);
 
 #endif //HW2_TEST_SHARED_H
